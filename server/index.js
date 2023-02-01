@@ -61,9 +61,9 @@ app.post("/login", async (req, res) => {
         },
         "secret123"
       );
-      res.json({ message: "Logged in successfully", user: token });
+      return res.json({ message: "Logged in successfully", user: token });
     } else {
-      res.status(401).json({ message: "Invalid email or password" });
+      return res.json({ message: "Invalid email or password", user: false });
     }
   } catch (error) {
     console.log(error);

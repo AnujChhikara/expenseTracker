@@ -21,6 +21,7 @@ const Login: React.FC = () => {
 
     if (data.user) {
       alert("Login Successful");
+      window.location.href = "/home";
     } else {
       alert("please check your username and password");
     }
