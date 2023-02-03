@@ -35,7 +35,7 @@ app.post("/register", async (req, res) => {
     await user.save();
 
     // Respond with a success message
-    res.json({ message: "User created successfully" });
+    res.json({ message: "User created successfully", status: "ok" });
   } catch (error) {
     res
       .status(500)
@@ -73,32 +73,6 @@ app.post("/login", async (req, res) => {
 
 app.get("/", (req, res) => {
   res.send("beckend");
-});
-app.get("/protected", (req, res) => {
-  const token = req.headers["authorization"]; // Get the token from the request headers
-
-  try {
-    const decoded = jwt.verify(token, "secret123"); // Verify the token using the secret string
-    res.json({ message: "Access granted!", decoded });
-  } catch (error) {
-    res.json({ message: "Access denied!", error });
-  }
-});
-
-app.post("/home", (req, res) => {
-  // Get the token from the request header
-  const token = req.headers.authorization;
-
-  // Verify the token
-  try {
-    const decoded = jwt.verify(token, "secret123");
-    const name = decoded.name;
-
-    // Respond with a success message and the user's name
-    res.json({ message: `Hello, ${name}!` });
-  } catch (error) {
-    res.status(401).json({ message: "Unauthorized" });
-  }
 });
 
 app.post("/hello", async (req, res) => {
