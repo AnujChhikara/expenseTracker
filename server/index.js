@@ -15,7 +15,7 @@ app.use(cors());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-const port = 5000;
+const port = 4000;
 
 app.post("/register", async (req, res) => {
   console.log(req.body);
@@ -27,7 +27,7 @@ app.post("/register", async (req, res) => {
     const user = await User.create({
       name: req.body.name,
       email: req.body.email,
-      password: req.body.password,
+      hashpassword: req.body.password,
     });
 
     // Save the user to the database
@@ -35,7 +35,7 @@ app.post("/register", async (req, res) => {
     await user.save();
 
     // Respond with a success message
-    res.json({ message: "User created successfully", status: "ok" });
+    res.json({ message: "User created successfully", status: "okay" });
   } catch (error) {
     res
       .status(500)
